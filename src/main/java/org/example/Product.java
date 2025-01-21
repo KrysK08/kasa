@@ -15,6 +15,6 @@ public class Product {
 
     @Override
     public String toString() {
-        return name + " - " + quantity + " szt. - " + price + " zł";
+        return name + " - " + quantity + " szt. - " + price + " zł/szt.";
     }
 }

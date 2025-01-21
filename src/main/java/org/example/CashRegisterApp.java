@@ -12,13 +12,18 @@ public class CashRegisterApp {
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Rozpocznij skanowanie");
-        System.out.print("Wprowadź kod produktu: ");
 
         while (true) {
-
+            System.out.print("Wprowadź kod produktu lub komendę (reset/pay): ");
             String input = scanner.nextLine();
 
-            processBarcode(input);
+            if (input.equals("reset")) {
+                resetTransaction();
+            } else if (input.equals("pay")) {
+                handlePayment(scanner);
+            } else {
+                processBarcode(input);
+            }
             displayProductList();
         }
     }
@@ -27,17 +32,55 @@ public class CashRegisterApp {
         Product product = shopDatabase.findProductByBarcode(barcode);
 
         if (product != null) {
-            productList.add(product);
+            boolean productExists = false;
+            for (Product existingProduct : productList) {
+                if (existingProduct.barcode.equals(barcode)) {
+                    existingProduct.quantity++;
+                    productExists = true;
+                    break;
+                }
+            }
+            if (!productExists) {
+                product.quantity = 1;
+                productList.add(product);
+            }
             System.out.println("Dodano produkt: " + product.name);
         } else {
             System.out.println("Nie znaleziono produktu o kodzie: " + barcode);
         }
     }
 
+    private static void resetTransaction() {
+        productList.clear();
+        System.out.println("Transakcja została zresetowana.");
+    }
+
+    private static void handlePayment(Scanner scanner) {
+        if (productList.isEmpty()) {
+            System.out.println("Lista produktów jest pusta. Nie można przeprowadzić płatności.");
+            return;
+        }
+
+        System.out.println("Wybierz metodę płatności lub zeskanuj kartę podarunkową:");
+        String paymentInput = scanner.nextLine();
+
+        if (shopDatabase.isPresentCard(paymentInput)) {
+            System.out.println("Zastosowano kartę podarunkową. Płatność zakończona.");
+            resetTransaction();
+        } else {
+            System.out.println("Płatność gotówkowa lub kartą zakończona.");
+            resetTransaction();
+        }
+    }
+
     private static void displayProductList() {
-        System.out.println("Aktualna lista zakupów:");
-        for (Product product : productList) {
-            System.out.println(product);
+        if (productList.isEmpty()) {
+            System.out.println("Lista produktów jest pusta.");
+        } else {
+            System.out.println("Aktualna lista zakupów:");
+            for (Product product : productList) {
+                System.out.println(product);
+            }
         }
     }
 }
