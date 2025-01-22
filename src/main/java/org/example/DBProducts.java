@@ -34,7 +34,7 @@ public class DBProducts {
              ResultSet rs = stmt.executeQuery(query)) {
 
             while (rs.next()) {
-                int IdProduktu = rs.getInt("IdProduktu");
+                String IdProduktu = rs.getString("IdProduktu");
                 String Nazwa = rs.getString("Nazwa");
                 double Cena = rs.getDouble("Cena");
 
