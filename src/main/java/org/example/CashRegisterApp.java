@@ -9,6 +9,14 @@ public class CashRegisterApp {
     private static List<Product> productList = new ArrayList<>();
 
     public static void main(String[] args) {
+
+        DBProducts dbProducts = new DBProducts();
+
+        try {
+            dbProducts.getProducts();
+        } finally {
+            dbProducts.closeConnection();
+        }
         Scanner scanner = new Scanner(System.in);
 
         System.out.println("Rozpocznij skanowanie");
@@ -83,4 +91,8 @@ public class CashRegisterApp {
             }
         }
     }
+
+
+
+
 }
