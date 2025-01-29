@@ -59,10 +59,19 @@ public class CashRegisterApp {
         if (productList.isEmpty()) {
             System.out.println("Lista produktów jest pusta. Nie można przeprowadzić płatności.");
             return;
-        }
+        }else {
+            System.out.println("Wybierz forme platnosci(card/cash):");
+            String payment = scanner.nextLine();
+            if(payment.equals("card")) {
+                System.out.println("Płatność kartą zakończona.");
+            }else if (payment.equals("cash")) {
+                System.out.println("Płatność gotówkowazakończona.");
+            }else{
+                System.out.println("Wybrano zla forme platnosci");
+                handlePayment(scanner);
+            }
 
-        System.out.println("Płatność gotówkowa lub kartą zakończona.");
-        resetTransaction();
+        }
     }
 
     private static void displayProductList() {
