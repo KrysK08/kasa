@@ -1,6 +1,6 @@
 package org.example;
 
-public class Product {
+class Product {
     String name;
     public String barcode;
     double price;

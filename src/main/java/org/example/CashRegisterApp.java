@@ -1,24 +1,16 @@
 package org.example;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CashRegisterApp {
-    private static ShopDatabase shopDatabase = new ShopDatabase();
+    private static DBProducts dbProducts = new DBProducts();
     private static List<Product> productList = new ArrayList<>();
 
     public static void main(String[] args) {
-
-        DBProducts dbProducts = new DBProducts();
-
-        try {
-            dbProducts.getProducts();
-        } finally {
-            dbProducts.closeConnection();
-        }
         Scanner scanner = new Scanner(System.in);
-
         System.out.println("Rozpocznij skanowanie");
 
         while (true) {
@@ -37,7 +29,7 @@ public class CashRegisterApp {
     }
 
     private static void processBarcode(String barcode) {
-        Product product = shopDatabase.findProductByBarcode(barcode);
+        Product product = dbProducts.findProductByBarcode(barcode);
 
         if (product != null) {
             boolean productExists = false;
@@ -69,16 +61,8 @@ public class CashRegisterApp {
             return;
         }
 
-        System.out.println("Wybierz metodę płatności lub zeskanuj kartę podarunkową:");
-        String paymentInput = scanner.nextLine();
-
-        if (shopDatabase.isPresentCard(paymentInput)) {
-            System.out.println("Zastosowano kartę podarunkową. Płatność zakończona.");
-            resetTransaction();
-        } else {
-            System.out.println("Płatność gotówkowa lub kartą zakończona.");
-            resetTransaction();
-        }
+        System.out.println("Płatność gotówkowa lub kartą zakończona.");
+        resetTransaction();
     }
 
     private static void displayProductList() {
@@ -91,8 +75,4 @@ public class CashRegisterApp {
             }
         }
     }
-
-
-
-
 }
