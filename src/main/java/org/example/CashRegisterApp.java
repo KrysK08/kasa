@@ -63,9 +63,11 @@ public class CashRegisterApp {
             System.out.println("Wybierz forme platnosci(card/cash):");
             String payment = scanner.nextLine();
             if(payment.equals("card")) {
-                System.out.println("Płatność kartą zakończona.");
+                System.out.println("Płatność kartą zakończona sukcesem.");
+                resetTransaction();
             }else if (payment.equals("cash")) {
-                System.out.println("Płatność gotówkowazakończona.");
+                System.out.println("Płatność gotówkowa zakończona sukcesem.");
+                resetTransaction();
             }else{
                 System.out.println("Wybrano zla forme platnosci");
                 handlePayment(scanner);
