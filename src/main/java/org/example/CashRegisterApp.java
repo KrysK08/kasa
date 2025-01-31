@@ -68,7 +68,9 @@ public class CashRegisterApp {
         String payment = scanner.nextLine();
 
         if (payment.equals("card")) {
-            System.out.println("Płatność kartą zakończona sukcesem.");
+            System.out.println("Wpisz numer karty: ");
+            String NumerKarty = scanner.nextLine();
+            processCardPayment(NumerKarty);
         } else if (payment.equals("cash")) {
             System.out.println("Płatność gotówkowa zakończona sukcesem.");
         } else {
@@ -77,6 +79,9 @@ public class CashRegisterApp {
             return;
         }
         resetTransaction();
+    }
+
+    private static void processCardPayment(String numerKarty) {
     }
 
     private static double calculateTotalPrice() {

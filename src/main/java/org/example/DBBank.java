@@ -18,5 +18,20 @@ public class DBBank {
             throw new RuntimeException(e);
         }
     }
-
+    public DBBank FindCardNumber(int cardNumber) {
+        String query = "SELECT * FROM card WHERE card_number = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query)) {
+            stmt.setInt(1, cardNumber);
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+                return new CardInfo(rs.getString("NumerKarty"),
+                        rs.getDouble("LimitKarty"),
+                        rs.getDate("TerminWaznosci"),
+                        rs.getInt("CVV"));
+            }
+        } catch (SQLException e) {
+            System.err.println("Błąd przy wyszukiwaniu karty: " + e.getMessage());
+        }
+        return null;
+    }
 }
