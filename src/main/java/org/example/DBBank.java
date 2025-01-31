@@ -18,10 +18,10 @@ public class DBBank {
             throw new RuntimeException(e);
         }
     }
-    public DBBank FindCardNumber(int cardNumber) {
-        String query = "SELECT * FROM card WHERE card_number = ?";
+    public DBBank FindCardNumber(String cardNumber) {
+        String query = "SELECT * FROM karty WHERE NumerKarty = ?";
         try (PreparedStatement stmt = connection.prepareStatement(query)) {
-            stmt.setInt(1, cardNumber);
+            stmt.setString(1, cardNumber);
             ResultSet rs = stmt.executeQuery();
             if (rs.next()) {
                 return new CardInfo(rs.getString("NumerKarty"),

@@ -1,12 +1,12 @@
 package org.example;
 
-import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 public class CashRegisterApp {
     private static DBProducts dbProducts = new DBProducts();
+    private static DBBank dbBank = new DBBank();
     private static List<Product> productList = new ArrayList<>();
 
     public static void main(String[] args) {
@@ -82,6 +82,7 @@ public class CashRegisterApp {
     }
 
     private static void processCardPayment(String numerKarty) {
+        CardInfo cardInfo = (CardInfo) dbBank.FindCardNumber(numerKarty);
     }
 
     private static double calculateTotalPrice() {
