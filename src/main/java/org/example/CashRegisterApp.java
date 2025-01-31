@@ -83,6 +83,12 @@ public class CashRegisterApp {
 
     private static void processCardPayment(String numerKarty) {
         CardInfo cardInfo = (CardInfo) dbBank.FindCardNumber(numerKarty);
+        if (cardInfo == null) {
+            System.out.println("Wpisano zla karte");
+        } else {
+            System.out.println("Numer karty: " + numerKarty);
+
+        }
     }
 
     private static double calculateTotalPrice() {
