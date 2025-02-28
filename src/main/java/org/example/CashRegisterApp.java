@@ -101,7 +101,7 @@ public class CashRegisterApp {
             resetTransaction();
         }else{
             System.out.println("Zly kod CVV");
-            processCvv(scanner,numerKarty);
+            processCardPayment(numerKarty);
         }
     }
 
