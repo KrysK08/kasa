@@ -12,7 +12,6 @@ public class DBBank {
     public DBBank() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Połączono z bazą danych!");
         } catch (SQLException e) {
             System.err.println("Błąd połączenia z bazą danych: " + e.getMessage());
             throw new RuntimeException(e);

@@ -8,10 +8,12 @@ public class CardInfo extends DBBank {
     Date TerminWaznosci;
     int CVV;
 
-    public CardInfo(String numerKarty, Double limitKarty, Date dataWaznosci, int CVV) {
-        this.NumerKarty = numerKarty;
-        this.LimitKarty = limitKarty;
-        this.TerminWaznosci = dataWaznosci;
+    public CardInfo(String NumerKarty, Double LimitKarty, Date TerminWaznosci, int CVV) {
+        this.NumerKarty = NumerKarty;
+        this.LimitKarty = LimitKarty;
+        this.TerminWaznosci = TerminWaznosci;
         this.CVV = CVV;
     }
+    @Override
+    public String toString() {return NumerKarty;}
 }

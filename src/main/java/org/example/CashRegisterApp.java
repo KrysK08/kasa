@@ -83,12 +83,19 @@ public class CashRegisterApp {
 
     private static void processCardPayment(String numerKarty) {
         CardInfo cardInfo = (CardInfo) dbBank.FindCardNumber(numerKarty);
+        Scanner scanner = new Scanner(System.in);
         if (cardInfo == null) {
             System.out.println("Wpisano zla karte");
         } else {
             System.out.println("Numer karty: " + numerKarty);
+            System.out.println("Podaj kod CVV: ");
+            String cvv = scanner.nextLine();
+            processCvv(cvv,numerKarty);
 
         }
+    }
+    private static void processCvv(String scanner, String numerKarty) {
+        System.out.println("numercvv");
     }
 
     private static double calculateTotalPrice() {

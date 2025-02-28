@@ -12,7 +12,6 @@ class DBProducts {
     public DBProducts() {
         try {
             connection = DriverManager.getConnection(URL, USER, PASSWORD);
-            System.out.println("Połączono z bazą danych!");
         } catch (SQLException e) {
             System.err.println("Błąd połączenia z bazą danych: " + e.getMessage());
             throw new RuntimeException(e);
@@ -38,14 +37,4 @@ class DBProducts {
         return null;
     }
 
-    public void closeConnection() {
-        try {
-            if (connection != null && !connection.isClosed()) {
-                connection.close();
-                System.out.println("Połączenie z bazą danych zamknięte.");
-            }
-        } catch (SQLException e) {
-            System.err.println("Błąd zamykania połączenia: " + e.getMessage());
-        }
-    }
 }
