@@ -96,8 +96,8 @@ public class CashRegisterApp {
     }
     private static void processCvv(String scanner, String numerKarty) {
         CardInfo cvv = (CardInfo) dbBank.FindCardNumber(numerKarty);
-        if(cvv.CVV == scanner) {
-            System.out.println("Poprawny kod cvv");
+        if(cvv.CVV.equals(scanner)) {
+            System.out.println("Poprawny kod cvv transakcja zakonczona sukcesem");
         }else{
             System.out.println("Zly kod CVV");
         }
