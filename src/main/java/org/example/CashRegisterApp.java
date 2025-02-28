@@ -95,11 +95,11 @@ public class CashRegisterApp {
         }
     }
     private static void processCvv(String scanner, String numerKarty) {
-        CardInfo cvv = (CardInfo) dbBank.FindCVV(numerKarty, scanner);
+        CardInfo cvv = (CardInfo) dbBank.FindCardNumber(numerKarty);
         if(cvv.CVV == scanner) {
             System.out.println("Poprawny kod cvv");
         }else{
-            System.out.println("Zly numer CVV");
+            System.out.println("Zly kod CVV");
         }
     }
 

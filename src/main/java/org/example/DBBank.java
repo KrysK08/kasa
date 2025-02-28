@@ -33,10 +33,5 @@ public class DBBank {
         }
         return null;
     }
-    public DBBank FindCVV(String cardNumber, String cvv) {
-        String query = "SELECT * FROM karty WHERE NumerKarty = ?";
 
-
-        return null;
-    }
 }
