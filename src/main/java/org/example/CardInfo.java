@@ -6,9 +6,9 @@ public class CardInfo extends DBBank {
     String NumerKarty;
     Double LimitKarty;
     Date TerminWaznosci;
-    int CVV;
+    String CVV;
 
-    public CardInfo(String NumerKarty, Double LimitKarty, Date TerminWaznosci, int CVV) {
+    public CardInfo(String NumerKarty, Double LimitKarty, Date TerminWaznosci, String CVV) {
         this.NumerKarty = NumerKarty;
         this.LimitKarty = LimitKarty;
         this.TerminWaznosci = TerminWaznosci;

@@ -26,11 +26,17 @@ public class DBBank {
                 return new CardInfo(rs.getString("NumerKarty"),
                         rs.getDouble("LimitKarty"),
                         rs.getDate("TerminWaznosci"),
-                        rs.getInt("CVV"));
+                        rs.getString("CVV"));
             }
         } catch (SQLException e) {
             System.err.println("Błąd przy wyszukiwaniu karty: " + e.getMessage());
         }
+        return null;
+    }
+    public DBBank FindCVV(String cardNumber, String cvv) {
+        String query = "SELECT * FROM karty WHERE NumerKarty = ?";
+
+
         return null;
     }
 }
