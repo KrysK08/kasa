@@ -78,7 +78,6 @@ public class CashRegisterApp {
             handlePayment(scanner);
             return;
         }
-        resetTransaction();
     }
 
     private static void processCardPayment(String numerKarty) {
@@ -86,6 +85,7 @@ public class CashRegisterApp {
         Scanner scanner = new Scanner(System.in);
         if (cardInfo == null) {
             System.out.println("Wpisano zla karte");
+            processCardPayment(scanner.nextLine());
         } else {
             System.out.println("Numer karty: " + numerKarty);
             System.out.println("Podaj kod CVV: ");
@@ -98,8 +98,10 @@ public class CashRegisterApp {
         CardInfo cvv = (CardInfo) dbBank.FindCardNumber(numerKarty);
         if(cvv.CVV.equals(scanner)) {
             System.out.println("Poprawny kod cvv transakcja zakonczona sukcesem");
+            resetTransaction();
         }else{
             System.out.println("Zly kod CVV");
+            processCvv(scanner,numerKarty);
         }
     }
 
