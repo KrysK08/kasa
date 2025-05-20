@@ -3,6 +3,9 @@ package org.example;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 
 public class CashRegisterApp {
     private static DBProducts dbProducts = new DBProducts();
@@ -73,6 +76,7 @@ public class CashRegisterApp {
             processCardPayment(NumerKarty);
         } else if (payment.equals("cash")) {
             System.out.println("Płatność gotówkowa zakończona sukcesem.");
+            printReceipt("gotówka");
         } else {
             System.out.println("Wybrano złą formę płatności.");
             handlePayment(scanner);
@@ -97,7 +101,8 @@ public class CashRegisterApp {
     private static void processCvv(String scanner, String numerKarty) {
         CardInfo cvv = (CardInfo) dbBank.FindCardNumber(numerKarty);
         if(cvv.CVV.equals(scanner)) {
-            System.out.println("Poprawny kod cvv transakcja zakonczona sukcesem");
+            System.out.println("Poprawny kod CVV. Transakcja zakończona sukcesem!");
+            printReceipt("karta");
             resetTransaction();
         }else{
             System.out.println("Zly kod CVV");
@@ -116,19 +121,51 @@ public class CashRegisterApp {
     private static void displayProductList() {
         if (productList.isEmpty()) {
             System.out.println("\n----------------------------------");
-            System.out.println("  Lista produktów jest pusta.");
+            System.out.println("   Lista produktów jest pusta.");
             System.out.println("----------------------------------\n");
         } else {
             System.out.println("\n==================================");
-            System.out.println("    AKTUALNA LISTA ZAKUPÓW:");
+            System.out.println("   AKTUALNA LISTA ZAKUPÓW:");
             System.out.println("==================================");
             System.out.printf("%-20s %-10s %-10s%n", "Produkt", "Cena", "Ilość");
             System.out.println("----------------------------------");
+
+            double total = 0.0;
             for (Product product : productList) {
                 System.out.printf("%-20s %-10.2f %-10d%n", product.name, product.price, product.quantity);
+                total += product.price * product.quantity;
             }
+
+            System.out.println("----------------------------------");
+            System.out.printf("   %-20s %-10.2f zł%n", "SUMA CAŁKOWITA:", total);
             System.out.println("==================================\n");
         }
     }
+    private static void printReceipt(String paymentMethod) {
+        System.out.println("\n=========================================");
+        System.out.println("           SKLEP SPOŻYWCZY");
+        System.out.println("         UL. PROGRAMISTÓW 123");
+        System.out.println("         NIP: 123-456-78-90\n");
+
+        LocalDateTime now = LocalDateTime.now();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        System.out.println("Data: " + now.format(formatter));
+        System.out.println("-----------------------------------------");
+        System.out.printf("%-20s %-7s %-7s%n", "Produkt", "Cena", "Ilość");
+
+        double total = 0.0;
+        for (Product product : productList) {
+            System.out.printf("%-20s %-7.2f %-7d%n", product.name, product.price, product.quantity);
+            total += product.price * product.quantity;
+        }
+
+        System.out.println("-----------------------------------------");
+        System.out.printf("SUMA DO ZAPŁATY:         %.2f zł%n", total);
+        System.out.println("FORMA PŁATNOŚCI:         " + paymentMethod.toUpperCase());
+        System.out.println("-----------------------------------------");
+        System.out.println("       DZIĘKUJEMY ZA ZAKUPY!");
+        System.out.println("=========================================\n");
+    }
+
 
 }
