@@ -115,12 +115,20 @@ public class CashRegisterApp {
 
     private static void displayProductList() {
         if (productList.isEmpty()) {
-            System.out.println("Lista produktów jest pusta.");
+            System.out.println("\n----------------------------------");
+            System.out.println("  Lista produktów jest pusta.");
+            System.out.println("----------------------------------\n");
         } else {
-            System.out.println("Aktualna lista zakupów:");
+            System.out.println("\n==================================");
+            System.out.println("    AKTUALNA LISTA ZAKUPÓW:");
+            System.out.println("==================================");
+            System.out.printf("%-20s %-10s %-10s%n", "Produkt", "Cena", "Ilość");
+            System.out.println("----------------------------------");
             for (Product product : productList) {
-                System.out.println(product);
+                System.out.printf("%-20s %-10.2f %-10d%n", product.name, product.price, product.quantity);
             }
+            System.out.println("==================================\n");
         }
     }
+
 }
