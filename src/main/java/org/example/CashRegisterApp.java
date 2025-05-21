@@ -67,7 +67,7 @@ public class CashRegisterApp {
         double totalPrice = calculateTotalPrice();
         System.out.println("Cena całkowita: " + totalPrice + " zł");
 
-        System.out.println("Wybierz formę płatności (card/cash):");
+        System.out.println("Wybierz formę płatności (card/cash/blik):");
         String payment = scanner.nextLine();
 
         if (payment.equals("card")) {
@@ -77,7 +77,11 @@ public class CashRegisterApp {
         } else if (payment.equals("cash")) {
             System.out.println("Płatność gotówkowa zakończona sukcesem.");
             printReceipt("gotówka");
-        } else {
+        } else if(payment.equals("blik")) {
+            System.out.println("W trakcie pracy, skorzystaj z innej metody");
+            handlePayment(scanner);
+        }
+        else{
             System.out.println("Wybrano złą formę płatności.");
             handlePayment(scanner);
             return;

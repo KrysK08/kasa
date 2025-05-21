@@ -36,5 +36,20 @@ class DBProducts {
         }
         return null;
     }
-
+    public void DecreaseBalance(Double cena, Integer id){
+        String query2 = "UPDATE konta SET Saldo TO Saldo - ? WHERE IdProduktu = ?";
+        try (PreparedStatement stmt = connection.prepareStatement(query2)){
+            stmt.setDouble(1, cena);
+            stmt.setInt(2, id);
+            int rowsUpdated = stmt.executeUpdate();
+            if (rowsUpdated == 0) {
+                System.out.println("Nie znaleziono rekordu do zaktualizowania.");
+            } else {
+                System.out.println("Zaktualizowano saldo pomyślnie.");
+            }
+        } catch (SQLException e) {
+            System.err.println("Błąd podczas aktualizacji salda: " + e.getMessage());
+        }
+    }
 }
+
